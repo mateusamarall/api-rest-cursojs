@@ -2,12 +2,20 @@
   "name": "api-rest-cursojs",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
   "repository": "https://github.com/mateusamarall/api-rest-cursojs.git",
   "author": "mateusamarall <mateus.amaral018@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^7.13.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6",
+    "sucrase": "^3.16.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
