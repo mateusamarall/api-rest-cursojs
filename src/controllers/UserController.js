@@ -10,22 +10,67 @@ class UserController {
         errors: error.errors.map((err) => err.message),
       });
     }
+  }
 
-    // const userExists = await User.findOne({
-    //   where: { email: req.body.email },
-    // });
+  async index(req, res) {
+    try {
+      const users = await User.findAll();
+      return res.json(users);
+    } catch (error) {
+      return res.json();
+    }
+  }
 
-    // if (userExists) {
-    //   return res.status(400).json({
-    //  error: 'Já existe um usuário com este email na base de dados' });
-    // }
-    // const {
-    //   id, nome, sobrenome, email,
-    // } = await User.create(req.body);
+  async show(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findByPk(id);
+      return res.json(user);
+    } catch (error) {
+      return res.json();
+    }
+  }
 
-    // return res.json({
-    //   id, nome, sobrenome, email,
-    // });
+  async update(req, res) {
+    try {
+      if (!req.params.id) {
+        return res.status(400).json({ errors: ['ID não encontrado.'] });
+      }
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res.status(400).json({
+          errors: ['Usuário não encontrado'],
+        });
+      }
+      const novoUser = await user.update(req.body);
+      return res.json(novoUser);
+    } catch (error) {
+      return res.status(400).json({
+        errors: error.errors.map((err) => err.message),
+      });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      if (!req.params.id) {
+        return res.status(400).json({ errors: ['ID não encontrado.'] });
+      }
+      const user = await User.findByPk(req.params.id);
+
+      if (!user) {
+        return res.status(400).json({
+          errors: ['Usuário não encontrado'],
+        });
+      }
+      await user.destroy();
+      return res.json(user);
+    } catch (error) {
+      return res.status(400).json({
+        errors: error.errors.map((err) => err.message),
+      });
+    }
   }
 }
 
