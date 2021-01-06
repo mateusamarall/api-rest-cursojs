@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build":"sucrase ./src -d ./dist --transforms imports",
+    "start": "node dist/server.js"
   },
   "repository": "https://github.com/mateusamarall/api-rest-cursojs.git",
   "author": "mateusamarall <mateus.amaral018@gmail.com>",
